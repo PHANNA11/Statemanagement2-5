@@ -1,50 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:statemanagement_proj/bloc/counter_bloc.dart';
+import 'package:get/get.dart';
+
+import 'controller/counter_controller.dart';
 
 class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
-
+  SecondScreen({super.key});
+  final controller = Get.put(CounterController());
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CounterBloc, CounterState>(
-      builder: (contextBloc, state) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue,
-            title: Text(
-              'SECOND PAGE',
+    return GetBuilder<CounterController>(builder: (contextGetx) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: Text(
+            'SECOND PAGE',
+          ),
+        ),
+        body: Center(
+          child: Text(
+            contextGetx.number.value.toString(),
+            style: TextStyle(fontSize: 26),
+          ),
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FloatingActionButton.small(
+              backgroundColor: Colors.blue,
+              shape: CircleBorder(),
+              onPressed: () {
+                contextGetx.deCrementNumber();
+              },
+              child: Icon(Icons.remove),
             ),
-          ),
-          body: Center(
-            child: Text(
-              state.number.toString(),
-              style: TextStyle(fontSize: 26),
+            FloatingActionButton.small(
+              backgroundColor: Colors.blue,
+              shape: CircleBorder(),
+              onPressed: () {
+                contextGetx.inCrementNumber();
+              },
+              child: Icon(Icons.add),
             ),
-          ),
-          floatingActionButton: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FloatingActionButton.small(
-                backgroundColor: Colors.blue,
-                shape: CircleBorder(),
-                onPressed: () {
-                  contextBloc.read<CounterBloc>().add(DecrementEvent());
-                },
-                child: Icon(Icons.remove),
-              ),
-              FloatingActionButton.small(
-                backgroundColor: Colors.blue,
-                shape: CircleBorder(),
-                onPressed: () {
-                  contextBloc.read<CounterBloc>().add(IncrementEvent());
-                },
-                child: Icon(Icons.add),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+          ],
+        ),
+      );
+    });
   }
 }

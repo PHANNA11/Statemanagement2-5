@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:statemanagement_proj/controller/counter_controller.dart';
 import 'package:statemanagement_proj/second_screen.dart';
-
-import 'bloc/counter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,57 +11,57 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final controller = Get.put(CounterController());
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CounterBloc, CounterState>(
-      builder: (contextBloc, state) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue,
-            title: Text(
-              'data',
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SecondScreen(),
-                        ));
-                  },
-                  child: Text('Next'))
-            ],
+    return GetBuilder<CounterController>(builder: (contextGetx) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: Text(
+            'Getx',
           ),
-          body: Center(
-            child: Text(
-              state.number.toString(),
-              style: TextStyle(fontSize: 26),
-            ),
-          ),
-          floatingActionButton: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FloatingActionButton.small(
-                backgroundColor: Colors.blue,
-                shape: CircleBorder(),
+          actions: [
+            TextButton(
                 onPressed: () {
-                  contextBloc.read<CounterBloc>().add(DecrementEvent());
+                  Get.to(SecondScreen());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => SecondScreen(),
+                  //     ));
                 },
-                child: Icon(Icons.remove),
-              ),
-              FloatingActionButton.small(
-                backgroundColor: Colors.blue,
-                shape: CircleBorder(),
-                onPressed: () {
-                  contextBloc.read<CounterBloc>().add(IncrementEvent());
-                },
-                child: Icon(Icons.add),
-              ),
-            ],
+                child: Text('Next Page'))
+          ],
+        ),
+        body: Center(
+          child: Text(
+            contextGetx.number.value.toString(),
+            style: TextStyle(fontSize: 26),
           ),
-        );
-      },
-    );
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FloatingActionButton.small(
+              backgroundColor: Colors.blue,
+              shape: CircleBorder(),
+              onPressed: () {
+                contextGetx.deCrementNumber();
+              },
+              child: Icon(Icons.remove),
+            ),
+            FloatingActionButton.small(
+              backgroundColor: Colors.blue,
+              shape: CircleBorder(),
+              onPressed: () {
+                contextGetx.inCrementNumber();
+              },
+              child: Icon(Icons.add),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
