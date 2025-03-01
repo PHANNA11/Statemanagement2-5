@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controller/counter_controller.dart';
+import 'counter_controller.dart';
 
 class SecondScreen extends StatelessWidget {
   SecondScreen({super.key});

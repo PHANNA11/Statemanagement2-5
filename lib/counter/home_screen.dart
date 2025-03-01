@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:statemanagement_proj/controller/counter_controller.dart';
-import 'package:statemanagement_proj/second_screen.dart';
+import 'package:statemanagement_proj/counter/counter_controller.dart';
+import 'package:statemanagement_proj/counter/second_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
