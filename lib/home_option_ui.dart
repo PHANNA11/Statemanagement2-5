@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:statemanagement_proj/counter/home_screen.dart';
+import 'package:statemanagement_proj/setting/setting_screen.dart';
 
 import 'view/person/home_list.dart';
 
@@ -18,7 +19,7 @@ class HomeOptionUi extends StatelessWidget {
           Card(
             elevation: 0,
             child: ListTile(
-              onTap: () => Get.to(HomeScreen()),
+              onTap: () => Get.to(() => HomeScreen()),
               leading: Icon(
                 Icons.app_settings_alt,
                 size: 40,
@@ -30,7 +31,7 @@ class HomeOptionUi extends StatelessWidget {
           Card(
             elevation: 0,
             child: ListTile(
-              onTap: () => Get.to(HomeListUser()),
+              onTap: () => Get.to(() => HomeListUser()),
               leading: Icon(
                 Icons.list,
                 size: 40,
@@ -42,7 +43,7 @@ class HomeOptionUi extends StatelessWidget {
           Card(
             elevation: 0,
             child: ListTile(
-              // onTap: () => Get.to(HomeListUser()),
+              onTap: () => Get.to(() => SettingsScreen()),
               leading: Icon(
                 Icons.settings_ethernet,
                 size: 40,
